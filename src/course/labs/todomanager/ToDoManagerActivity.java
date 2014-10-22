@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import course.labs.todomanager.ToDoItem.Priority;
 import course.labs.todomanager.ToDoItem.Status;
+import android.widget.Toast;
 
 public class ToDoManagerActivity extends ListActivity {
 
@@ -90,11 +91,21 @@ public class ToDoManagerActivity extends ListActivity {
 		// Create a new ToDoItem from the data Intent
 		// and then add it to the adapter
 			if (requestCode == ADD_TODO_ITEM_REQUEST) {
+
 				Log.i(TAG, "Request code is ADD_TODO_ITEM_REQUEST");
+
 				if (resultCode == RESULT_OK) {
-					// If so, update the Textview showing the user-entered text.
-					Log.i(TAG, "Result is OK");
-					// TODO - implement Item creation
+
+					Log.i(TAG, "Result is OK, creating the new item...");
+					// TODO - PM - implement Item creation
+
+                    ToDoItem newToDo = new ToDoItem(data);
+                    // DBug Toast
+                    Toast.makeText(getApplicationContext(), newToDo.getTitle(), Toast.LENGTH_LONG).show();
+
+                    mAdapter.add(newToDo);
+
+
 				}
 			}
 			
