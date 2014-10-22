@@ -126,6 +126,7 @@ public class AddToDoActivity extends Activity {
 				// gather ToDoItem data
 
 				// TODO - Get the current Priority
+				int checkedRadioButtonId = mPriorityRadioGroup.getCheckedRadioButtonId();
 				Priority priority = Priority.values()[mPriorityRadioGroup.indexOfChild(findViewById(mPriorityRadioGroup.getCheckedRadioButtonId()))];
 
 				// TODO - Get the current Status

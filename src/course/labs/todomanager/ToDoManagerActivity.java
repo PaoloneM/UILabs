@@ -101,7 +101,7 @@ public class ToDoManagerActivity extends ListActivity {
 
                     ToDoItem newToDo = new ToDoItem(data);
                     // DBug Toast
-                    Toast.makeText(getApplicationContext(), newToDo.getTitle(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), ("Title: " + newToDo.getTitle() + "\nSatus: " + newToDo.getStatus().toString() + "\nPriority: " + newToDo.getPriority().toString()) , Toast.LENGTH_LONG).show();
 
                     mAdapter.add(newToDo);
 

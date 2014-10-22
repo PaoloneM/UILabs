@@ -15,8 +15,9 @@ public class ToDoItem {
 		LOW, MED, HIGH
 	};
 
+	// PM - To map enum on radio group, swapped enum items order
 	public enum Status {
-		NOTDONE, DONE
+		DONE, NOTDONE
 	};
 
 	public final static String TITLE = "title";
