@@ -16,3 +16,15 @@ bin/classes/course/labs/todomanager/AddToDoActivity$1.class
 gen/course/labs/todomanager/BuildConfig.java
 
 gen/course/labs/todomanager/R.java
+
+bin/classes.dex
+
+bin/res/crunch/drawable-hdpi/icon.png
+
+bin/res/crunch/drawable-mdpi/icon.png
+
+bin/res/crunch/drawable-ldpi/icon.png
+
+bin/resources.ap_
+
+bin/UILabs.apk

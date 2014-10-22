@@ -94,7 +94,9 @@ public class AddToDoActivity extends Activity {
 				Log.i(TAG, "Entered cancelButton.OnClickListener.onClick()");
 
 				// TODO - Indicate result and finish
-
+				Intent cancelIntent = new Intent(v.getContext(), ToDoManagerActivity.class);
+				setResult(RESULT_CANCELED, cancelIntent);
+				((Activity) v.getContext()).finish();
 			}
 		});
 
@@ -106,7 +108,10 @@ public class AddToDoActivity extends Activity {
 				Log.i(TAG, "Entered resetButton.OnClickListener.onClick()");
 
 				// TODO - Reset data to default values
-
+				setDefaultDateTime();
+				mTitleText.getText().clear();
+				mStatusRadioGroup.check(mDefaultStatusButton.getId());
+				mPriorityRadioGroup.check(mDefaultPriorityButton.getId());
 			}
 		});
 
@@ -121,13 +126,13 @@ public class AddToDoActivity extends Activity {
 				// gather ToDoItem data
 
 				// TODO - Get the current Priority
-				Priority priority = null;
+				Priority priority = Priority.values()[mPriorityRadioGroup.indexOfChild(findViewById(mPriorityRadioGroup.getCheckedRadioButtonId()))];
 
 				// TODO - Get the current Status
-				Status status = null;
+				Status status = Status.values()[mStatusRadioGroup.indexOfChild(findViewById(mStatusRadioGroup.getCheckedRadioButtonId()))];;
 
 				// TODO - Get the current ToDoItem Title
-				String titleString = null;
+				String titleString = mTitleText.getText().toString();
 
 				// Construct the Date string
 				String fullDate = dateString + " " + timeString;
@@ -138,6 +143,8 @@ public class AddToDoActivity extends Activity {
 						fullDate);
 
 				// TODO - return data Intent and finish
+				setResult(RESULT_OK, data);
+				((Activity) v.getContext()).finish();
 
 			}
 		});
