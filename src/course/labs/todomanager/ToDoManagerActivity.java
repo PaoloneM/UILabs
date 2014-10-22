@@ -89,6 +89,16 @@ public class ToDoManagerActivity extends ListActivity {
 		// if user submitted a new ToDoItem
 		// Create a new ToDoItem from the data Intent
 		// and then add it to the adapter
+			if (requestCode == ADD_TODO_ITEM_REQUEST) {
+				Log.i(TAG, "Request code is ADD_TODO_ITEM_REQUEST");
+				if (resultCode == RESULT_OK) {
+					// If so, update the Textview showing the user-entered text.
+					Log.i(TAG, "Result is OK");
+					// TODO - implement Item creation
+				}
+			}
+			
+
 
 	}
 
