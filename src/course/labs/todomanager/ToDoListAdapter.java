@@ -3,8 +3,6 @@ package course.labs.todomanager;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +22,14 @@ public class ToDoListAdapter extends BaseAdapter {
 
 	private static final String TAG = "Lab-UserInterface";
 
+	// PM - My ViewHolder. Caches ToDoItem structure
+	static class ViewHolder {
+	    TextView titleView;
+	    CheckBox statusView;
+	    TextView priorityView;
+	    TextView dateView;	    
+	}
+	
 	public ToDoListAdapter(Context context) {
 
 		mContext = context;
@@ -89,6 +95,8 @@ public class ToDoListAdapter extends BaseAdapter {
 
 		Log.i(TAG, "Entered list adapter getView()");
 		
+		ViewHolder viewHolderItem;
+		
 		// TODO - Get the current ToDoItem
 		final ToDoItem toDoItem = mItems.get(position);
 
@@ -98,11 +106,29 @@ public class ToDoListAdapter extends BaseAdapter {
 		RelativeLayout itemLayout = (RelativeLayout) convertView;
 		
 		if (itemLayout == null) {
+			
 			Log.i(TAG, "Inflating todo_item layout");
-			LayoutInflater inflater = (LayoutInflater) mContext
-			        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			
+			viewHolderItem = new ViewHolder();
+			
+			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.todo_item, parent, false); 
+			
+			viewHolderItem.titleView = (TextView) itemLayout.findViewById(R.id.titleView);
+			viewHolderItem.statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
+			viewHolderItem.priorityView = (TextView) itemLayout.findViewById(R.id.priorityView);
+			viewHolderItem.dateView = (TextView) itemLayout.findViewById(R.id.dateView);
+			
+			itemLayout.setTag(viewHolderItem);
 		}
+		
+		else {
+			
+			viewHolderItem = (ViewHolder) itemLayout.getTag();
+
+		}
+			
+			
 		
 		// TODO - Fill in specific ToDoItem data
 		// Remember that the data that goes in this View
@@ -110,15 +136,15 @@ public class ToDoListAdapter extends BaseAdapter {
 		// in the layout file
 
 		// TODO - Display Title in TextView
-	    final TextView titleView = (TextView) itemLayout.findViewById(R.id.titleView);
-		titleView.setText(toDoItem.getTitle());
+	    
+		viewHolderItem.titleView.setText(toDoItem.getTitle());
 
 		// TODO - Set up Status CheckBox
-		final CheckBox statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
-		Boolean mStatus = (ToDoItem.Status.valueOf(toDoItem.getStatus().toString()).ordinal() == 0) ? true : false;
-		statusView.setChecked(mStatus);
 
-		statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		Boolean mStatus = (ToDoItem.Status.valueOf(toDoItem.getStatus().toString()).ordinal() == 0) ? true : false;
+		viewHolderItem.statusView.setChecked(mStatus);
+
+		viewHolderItem.statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
@@ -134,15 +160,13 @@ public class ToDoListAdapter extends BaseAdapter {
 
 		// TODO - Display Priority in a TextView
 
-		final TextView priorityView = (TextView) itemLayout.findViewById(R.id.priorityView);
-		priorityView.setText(toDoItem.getPriority().toString());
+		viewHolderItem.priorityView.setText(toDoItem.getPriority().toString());
 
 		// TODO - Display Time and Date.
 		// Hint - use ToDoItem.FORMAT.format(toDoItem.getDate()) to get date and
 		// time String
 
-		final TextView dateView = (TextView) itemLayout.findViewById(R.id.dateView);
-		dateView.setText(ToDoItem.FORMAT.format(toDoItem.getDate()));
+		viewHolderItem.dateView.setText(ToDoItem.FORMAT.format(toDoItem.getDate()));
 
 		// Return the View you just created
 		return itemLayout;
