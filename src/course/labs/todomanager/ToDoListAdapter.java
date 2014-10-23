@@ -94,10 +94,16 @@ public class ToDoListAdapter extends BaseAdapter {
 
 		// TODO - Inflate the View for this ToDoItem
 		// from todo_item.xml
-		LayoutInflater inflater = (LayoutInflater) mContext
-		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		RelativeLayout itemLayout = (RelativeLayout) inflater.inflate(R.layout.todo_item, parent, false); 
 
+		RelativeLayout itemLayout = (RelativeLayout) convertView;
+		
+		if (itemLayout == null) {
+			Log.i(TAG, "Inflating todo_item layout");
+			LayoutInflater inflater = (LayoutInflater) mContext
+			        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			itemLayout = (RelativeLayout) inflater.inflate(R.layout.todo_item, parent, false); 
+		}
+		
 		// TODO - Fill in specific ToDoItem data
 		// Remember that the data that goes in this View
 		// corresponds to the user interface elements defined
